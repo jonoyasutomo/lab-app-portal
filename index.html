@@ -2,29 +2,94 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>アプリ一覧</title>
+
+<title>研究・教育用アプリ一覧</title>
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <style>
-body{font-family:sans-serif;margin:24px}
-.card{border:1px solid #ccc;border-radius:10px;padding:12px;margin:10px 0;text-decoration:none;display:block;color:#000}
-.card:hover{background:#f5f5f5}
-.name{font-weight:bold}
+body{
+  font-family: sans-serif;
+  margin: 24px;
+  max-width: 900px;
+}
+
+h1{
+  margin-bottom: 8px;
+}
+
+.description{
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.card{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 14px;
+  margin: 12px 0;
+  text-decoration: none;
+  display: block;
+  color: #000;
+  transition: background 0.2s;
+}
+
+.card:hover{
+  background: #f5f5f5;
+}
+
+.name{
+  font-weight: bold;
+  font-size: 1.05em;
+  margin-bottom: 2px;
+}
 </style>
 </head>
 
 <body>
 
-<h1>アプリ一覧</h1>
+<h1>📚 研究・教育用アプリ一覧</h1>
+
+<div class="description">
+本ページは、研究・教育目的で開発・公開しているWebアプリの一覧です。<br>
+各アプリの詳細・利用条件については、個別ページをご確認ください。
+</div>
+
+<!-- =========================
+     App List (ここに追加)
+     ========================= -->
 
 <a class="card" href="https://emg-fatigue-filter-app.pages.dev">
-<div class="name">EMG fatigue filter</div>
-<div>筋電図解析ツール</div>
+  <div class="name">EMG fatigue filter</div>
+  <div>筋電図解析ツール</div>
 </a>
 
 <a class="card" href="https://policy-b6j.pages.dev">
-<div class="name">Policy</div>
-<div>ポリシー</div>
+  <div class="name">Policy</div>
+  <div>ポリシー・利用規約</div>
 </a>
+
+<!-- =========================
+     追加する場合はこの下に
+     card をコピペして使う
+     ========================= -->
+
+<!--
+例：
+
+<a class="card" href="https://smile-expression-analysis-tool.pages.dev">
+  <div class="name">Smile Expression Analysis Tool</div>
+  <div>笑顔解析ツール</div>
+</a>
+-->
+
+<hr style="margin-top:32px;">
+
+<div style="font-size:0.85em;color:#666;">
+Last updated: 2026<br>
+Maintained for research and educational use.
+</div>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-lang="ja">
 <head>
 <meta charset="utf-8">
 
@@ -18,6 +18,29 @@ h1{
   margin-bottom: 8px;
 }
 
+/* Language switch (right-top) */
+.lang-switch{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 9999;
+}
+.lang-switch button{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+.lang-switch button[aria-pressed="true"]{
+  border-color: #666;
+  font-weight: 700;
+}
+
+/* Description and cards */
 .description{
   color: #555;
   margin-bottom: 20px;
@@ -34,26 +57,72 @@ h1{
   color: #000;
   transition: background 0.2s;
 }
-
 .card:hover{
   background: #f5f5f5;
 }
-
 .name{
   font-weight: bold;
   font-size: 1.05em;
   margin-bottom: 2px;
 }
+
+/* i18n: show/hide */
+.i18n{ display: none; }
+html[data-lang="ja"] .i18n-ja{ display: inline; }
+html[data-lang="en"] .i18n-en{ display: inline; }
+html[data-lang="ja"] .i18n-ja.block{ display: block; }
+html[data-lang="en"] .i18n-en.block{ display: block; }
 </style>
+
+<script>
+(function(){
+  function setLang(lang){
+    document.documentElement.setAttribute("data-lang", lang);
+    document.documentElement.setAttribute("lang", lang === "en" ? "en" : "ja");
+
+    var btnJa = document.getElementById("btnLangJa");
+    var btnEn = document.getElementById("btnLangEn");
+    if(btnJa && btnEn){
+      btnJa.setAttribute("aria-pressed", lang === "ja" ? "true" : "false");
+      btnEn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+    }
+    try{ localStorage.setItem("uiLang", lang); }catch(e){}
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    var saved = null;
+    try{ saved = localStorage.getItem("uiLang"); }catch(e){}
+    setLang(saved === "en" ? "en" : "ja");
+
+    document.getElementById("btnLangJa").addEventListener("click", function(){ setLang("ja"); });
+    document.getElementById("btnLangEn").addEventListener("click", function(){ setLang("en"); });
+  });
+})();
+</script>
 </head>
 
 <body>
 
-<h1>📚 研究・教育用アプリ一覧</h1>
+<!-- Right-top language buttons -->
+<div class="lang-switch" aria-label="Language switch">
+  <button id="btnLangJa" type="button" aria-pressed="true">日本語</button>
+  <button id="btnLangEn" type="button" aria-pressed="false">English</button>
+</div>
+
+<h1>
+  <span class="i18n i18n-ja">📚 研究・教育用アプリ一覧</span>
+  <span class="i18n i18n-en">📚 Research & Education Apps</span>
+</h1>
 
 <div class="description">
-本ページは、研究・教育目的で開発・公開しているWebアプリの一覧です。<br>
-各アプリの詳細・利用条件については、個別ページをご確認ください。
+  <span class="i18n i18n-ja">
+    本ページは、研究・教育目的で開発・公開しているWebアプリの一覧です。<br>
+    各アプリの詳細・利用条件については、個別ページをご確認ください。
+  </span>
+  <span class="i18n i18n-en">
+    This page lists web applications developed and published for research and educational purposes.<br>
+    Please check each application page for details and usage conditions.
+  </span>
 </div>
 
 <!-- =========================
@@ -62,30 +131,31 @@ h1{
 
 <a class="card" href="https://emg-fatigue-filter-app.pages.dev">
   <div class="name">EMG fatigue filter</div>
-  <div>筋電図解析ツール</div>
+  <div>
+    <span class="i18n i18n-ja">筋電図解析ツール</span>
+    <span class="i18n i18n-en">EMG analysis tool</span>
+  </div>
+</a>
+
+<a class="card" href="https://smile-expression-analysis-tool.pages.dev">
+  <div class="name">Smile Expression Analysis Tool</div>
+  <div>
+    <span class="i18n i18n-ja">笑顔解析ツール</span>
+    <span class="i18n i18n-en">Smile expression analysis tool</span>
+  </div>
 </a>
 
 <a class="card" href="https://policy-b6j.pages.dev">
   <div class="name">Policy</div>
-  <div>ポリシー・利用規約</div>
+  <div>
+    <span class="i18n i18n-ja">ポリシー・利用規約</span>
+    <span class="i18n i18n-en">Policy / Terms</span>
+  </div>
 </a>
-
-<!-- =========================
-     追加する場合はこの下に
-     card をコピペして使う
-     ========================= -->
-
-<!--
-例：
-
-<a class="card" href="https://smile-expression-analysis-tool.pages.dev">
-  <div class="name">Smile Expression Analysis Tool</div>
-  <div>笑顔解析ツール</div>
-</a>
--->
 
 <hr style="margin-top:32px;">
 
+<!-- Keep originally-English footer as-is (your request) -->
 <div style="font-size:0.85em;color:#666;">
 Last updated: 2026<br>
 Maintained for research and educational use.
